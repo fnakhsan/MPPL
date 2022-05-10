@@ -142,7 +142,7 @@ table {
 
 .container {
     background-color: #F4F4F9;
-    width: 1440px;
+    width: auto;
     height: 1024px;
     display: flex;
     flex-direction: column;
