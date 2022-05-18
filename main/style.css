@@ -160,6 +160,7 @@ table {
     position: fixed;
     left: 0;
     right: 0;
+    z-index: 9999;
 }
 
 .container .header .logo {
@@ -241,6 +242,12 @@ nav ul li a:hover {
     border-radius: 5px;
     box-shadow: 0 0 5px #33ffff,
         0 0 10px #66ffff;
+}
+
+.main {
+    /* position: absolute;
+    top: 196px; */
+    margin: auto;
 }
 
 @media (max-width : 1600px) {
