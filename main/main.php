@@ -40,6 +40,9 @@ print_r($_COOKIE); ?>
                 </ul>
             </div>
         </div>
+        <div class="main">
+            <form action="" method="POST"></form>
+        </div>
     </div>
 </body>
 

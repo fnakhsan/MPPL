@@ -42,7 +42,7 @@ if (isset($_POST['submitBtn'])) {
         $q1   = mysqli_query($koneksi, $sql1);
         $r1   = mysqli_fetch_array($q1);
 
-        if ($r1['id_siswa'] == '') {
+        if (empty($r1['id_siswa'])) {
             $err .= "Username <b>$username</b> tidak tersedia.";
         } elseif ($r1['pw_siswa'] != md5($password)) {
             $err .= "Password yang dimasukkan tidak sesuai.";
@@ -108,12 +108,8 @@ if (isset($_POST['submitBtn'])) {
         </div>
     </div>
     <?php if ($err) { ?>
-        <div id="login-alert" class="alert alert-danger col-sm-12">
-            <script type="text/javascript">
-                function fun() {
-                    alert("<?php echo $err ?>");
-                }
-            </script>
+        <div id="login-alert" class="alert">
+            <ul><?php echo $err ?></ul>
         </div>
     <?php } ?>
 </body>

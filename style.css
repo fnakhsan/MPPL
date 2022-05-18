@@ -340,6 +340,9 @@ div {
     font-weight: 600;
     text-transform: uppercase;
 }
+.alert {
+    margin: auto;
+}
 
 @media (max-width : 1600px) {
     .container .header .logo {
