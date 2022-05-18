@@ -53,8 +53,8 @@ if(isset($_POST['submitBtn'])){
                 <a href="#" id="rect"><img src="../assets/dropdown.png"></a>
                 <input type="checkbox" id="btn-1">
                 <ul>
-                    <li><a href="#">Profil</a></li>
-                    <li><a href="#">Riwayat</a></li>
+                    <li><a href="../profile/profile.php">Profil</a></li>
+                    <li><a href="../history/history.php">Riwayat</a></li>
                     <li><a href="../logout/logout.php">Logout</a></li>
                 </ul>
             </div>
