@@ -4,8 +4,26 @@ if (!isset($_SESSION['session_username'])) {
     header("location:login.php");
     exit();
 }
+$username = $_SESSION['session_username'];
 // print_r($_SESSION);
-// print_r($_COOKIE); ?>
+// print_r($_COOKIE); 
+$host_db    = "localhost";
+$user_db    = "root";
+$pass_db    = "";
+$nama_db    = "presensi";
+$koneksi = mysqli_connect($host_db, $user_db, $pass_db, $nama_db);
+
+if(isset($_POST['submitBtn'])){
+    $directory = "../berkas/";
+    $tgl_presensi = date("d-M-Y");
+    $status = $_POST['status'];
+    $valid = "NY";
+    $file_name = basename($_FILES['bukti']['name']);
+    move_uploaded_file($_FILES['bukti']['tmp_name'], $directory.$file_name);
+    mysqli_query($koneksi, "insert into presensi_siswa values('','$username','$tgl_presensi','$status','$valid','$file_name') where id_siswa = '$username'");
+    echo "file berhasil di upload";
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,19 +69,19 @@ if (!isset($_SESSION['session_username'])) {
                     echo "$date";
                     ?></h3>
             </div>
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
                 <div class="presensi">
                     <label>
-                        <input type="radio" name="presensi" value="hadir" placeholder=" ">Hadir
+                        <input type="radio" name="status" value="hadir" placeholder=" ">Hadir
                     </label>
                     <label>
-                        <input type="radio" name="presensi" value="sakit" placeholder=" ">Sakit
+                        <input type="radio" name="status" value="sakit" placeholder=" ">Sakit
                     </label>
                     <label>
-                        <input type="radio" name="presensi" value="izin" placeholder=" ">Izin
+                        <input type="radio" name="status" value="izin" placeholder=" ">Izin
                     </label>
                     <label>
-                        <input type="radio" name="presensi" value="alpha" placeholder=" ">Alpha
+                        <input type="radio" name="status" value="alpha" placeholder=" ">Alpha
                     </label>
                 </div>
                 <div class="file">
