@@ -38,7 +38,7 @@ if (isset($_POST['submitBtn'])) {
     if ($username == '' or $password == '') {
         $err .= "<li>Silakan masukkan username dan juga password.</li>";
     } else {
-        $sql1 = "select * from presensi where id_siswa = '$username'";
+        $sql1 = "select * from tb_siswa where id_siswa = '$username'";
         $q1   = mysqli_query($koneksi, $sql1);
         $r1   = mysqli_fetch_array($q1);
 
