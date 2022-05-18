@@ -12,23 +12,23 @@ $err        = "";
 $username   = "";
 // $ingataku   = "";
 
-// if (isset($_COOKIE['cookie_username'])) {
-//     $cookie_username = $_COOKIE['cookie_username'];
-//     $cookie_password = $_COOKIE['cookie_password'];
+if (isset($_COOKIE['cookie_username'])) {
+    $cookie_username = $_COOKIE['cookie_username'];
+    $cookie_password = $_COOKIE['cookie_password'];
 
-//     $sql1 = "select * from presensi where id_siswa = '$cookie_username'";
-//     $q1   = mysqli_query($koneksi, $sql1);
-//     $r1   = mysqli_fetch_array($q1);
-//     if ($r1['pw_siswa'] == $cookie_password) {
-//         $_SESSION['session_username'] = $cookie_username;
-//         $_SESSION['session_password'] = $cookie_password;
-//     }
-// }
+    $sql1 = "select * from presensi where id_siswa = '$cookie_username'";
+    $q1   = mysqli_query($koneksi, $sql1);
+    $r1   = mysqli_fetch_array($q1);
+    if ($r1['pw_siswa'] == $cookie_password) {
+        $_SESSION['session_username'] = $cookie_username;
+        $_SESSION['session_password'] = $cookie_password;
+    }
+}
 
-// if (isset($_SESSION['session_username'])) {
-//     header("location:./main/main.html");
-//     exit();
-// }
+if (isset($_SESSION['session_username'])) {
+    header("location:./main/main.html");
+    exit();
+}
 
 if (isset($_POST['submitBtn'])) {
     $username   = $_POST['username'];
@@ -49,18 +49,18 @@ if (isset($_POST['submitBtn'])) {
         }
 
         if (empty($err)) {
-            // $_SESSION['session_username'] = $username; //server
-            // $_SESSION['session_password'] = md5($password);
+            $_SESSION['session_username'] = $username; //server
+            $_SESSION['session_password'] = md5($password);
 
-            // $cookie_name = "cookie_username";
-            // $cookie_value = $username;
-            // $cookie_time = time() + (60 * 60 * 24 * 30);
-            // setcookie($cookie_name, $cookie_value, $cookie_time, "/");
+            $cookie_name = "cookie_username";
+            $cookie_value = $username;
+            $cookie_time = time() + (60 * 60 * 24 * 30);
+            setcookie($cookie_name, $cookie_value, $cookie_time, "/");
 
-            // $cookie_name = "cookie_password";
-            // $cookie_value = md5($password);
-            // $cookie_time = time() + (60 * 60 * 24 * 30);
-            // setcookie($cookie_name, $cookie_value, $cookie_time, "/");
+            $cookie_name = "cookie_password";
+            $cookie_value = md5($password);
+            $cookie_time = time() + (60 * 60 * 24 * 30);
+            setcookie($cookie_name, $cookie_value, $cookie_time, "/");
 
             header("location:./main/main.html");
         }
@@ -91,18 +91,20 @@ if (isset($_POST['submitBtn'])) {
             </div>
         </div>
         <div class="loginBox">
-            <div class="loginTitle">
-                <h2>Login</h2>
-            </div>
-            <div class="userBox">
-                <input id="formUser" type="text" name="username" class="inputUser" placeholder=" ">
-                <label for="formUser" class="inputUserLabel">Username</label>
-            </div>
-            <div class="pwBox">
-                <input id="formPw" type="password" name="password" class="inputPw" placeholder=" ">
-                <label for="formPw" class="inputPwLabel">Password</label>
-            </div>
-            <input type="submit" name="submitBtn" value="Submit" class="submitBtn" />
+            <form action="" method="POST">
+                <div class="loginTitle">
+                    <h2>Login</h2>
+                </div>
+                <div class="userBox">
+                    <input id="formUser" type="text" name="username" class="inputUser" placeholder=" ">
+                    <label for="formUser" class="inputUserLabel">Username</label>
+                </div>
+                <div class="pwBox">
+                    <input id="formPw" type="password" name="password" class="inputPw" placeholder=" ">
+                    <label for="formPw" class="inputPwLabel">Password</label>
+                </div>
+                <input type="submit" name="submitBtn" value="Submit" class="submitBtn" />
+            </form>
         </div>
     </div>
     <?php if ($err) { ?>
