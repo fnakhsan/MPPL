@@ -1,11 +1,11 @@
 <?php
-// session_start();
-// if (!isset($_SESSION['session_username'])) {
-//     header("location:login.php");
-//     exit();
-// }
-// print_r($_SESSION);
-// print_r($_COOKIE); ?>
+session_start();
+if (!isset($_SESSION['session_username'])) {
+    header("location:login.php");
+    exit();
+}
+print_r($_SESSION);
+print_r($_COOKIE); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +36,7 @@
                 <ul>
                     <li><a href="#">Profil</a></li>
                     <li><a href="#">Riwayat</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="../logout/logout.php">Logout</a></li>
                 </ul>
             </div>
         </div>

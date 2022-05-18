@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 
 //atur koneksi ke database
 $host_db    = "localhost";
@@ -12,23 +12,23 @@ $err        = "";
 $username   = "";
 // $ingataku   = "";
 
-// if (isset($_COOKIE['cookie_username'])) {
-//     $cookie_username = $_COOKIE['cookie_username'];
-//     $cookie_password = $_COOKIE['cookie_password'];
+if (isset($_COOKIE['cookie_username'])) {
+    $cookie_username = $_COOKIE['cookie_username'];
+    $cookie_password = $_COOKIE['cookie_password'];
 
-//     $sql1 = "select * from presensi where id_siswa = '$cookie_username'";
-//     $q1   = mysqli_query($koneksi, $sql1);
-//     $r1   = mysqli_fetch_array($q1);
-//     if ($r1['pw_siswa'] == $cookie_password) {
-//         $_SESSION['session_username'] = $cookie_username;
-//         $_SESSION['session_password'] = $cookie_password;
-//     }
-// }
+    $sql1 = "select * from tb_siswa where id_siswa = '$cookie_username'";
+    $q1   = mysqli_query($koneksi, $sql1);
+    $r1   = mysqli_fetch_array($q1);
+    if ($r1['pw_siswa'] == $cookie_password) {
+        $_SESSION['session_username'] = $cookie_username;
+        $_SESSION['session_password'] = $cookie_password;
+    }
+}
 
-// if (isset($_SESSION['session_username'])) {
-//     header("location:./main/main.html");
-//     exit();
-// }
+if (isset($_SESSION['session_username'])) {
+    header("location:./main/main.php");
+    exit();
+}
 
 if (isset($_POST['submitBtn'])) {
     $username   = $_POST['username'];
@@ -49,20 +49,20 @@ if (isset($_POST['submitBtn'])) {
         }
 
         if (empty($err)) {
-            // $_SESSION['session_username'] = $username; //server
-            // $_SESSION['session_password'] = md5($password);
+            $_SESSION['session_username'] = $username; //server
+            $_SESSION['session_password'] = md5($password);
 
-            // $cookie_name = "cookie_username";
-            // $cookie_value = $username;
-            // $cookie_time = time() + (60 * 60 * 24 * 30);
-            // setcookie($cookie_name, $cookie_value, $cookie_time, "/");
+            $cookie_name = "cookie_username";
+            $cookie_value = $username;
+            $cookie_time = time() + (60 * 60 * 2);
+            setcookie($cookie_name, $cookie_value, $cookie_time, "/");
 
-            // $cookie_name = "cookie_password";
-            // $cookie_value = md5($password);
-            // $cookie_time = time() + (60 * 60 * 24 * 30);
-            // setcookie($cookie_name, $cookie_value, $cookie_time, "/");
+            $cookie_name = "cookie_password";
+            $cookie_value = md5($password);
+            $cookie_time = time() + (60 * 60 * 2);
+            setcookie($cookie_name, $cookie_value, $cookie_time, "/");
 
-            header("location:./main/main.html");
+            header("location:./main/main.php");
         }
     }
 }
