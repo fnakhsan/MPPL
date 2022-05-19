@@ -51,9 +51,9 @@ if (isset($_POST['insertBtn'])) {
                 <img src="../assets/ic_profile.png">
             </div>
             <div class="dropdown">
-                <a href="#" id="rect"><img src="../assets/dropdown.png"></a>
-                <input type="checkbox" id="btn-1">
-                <ul>
+                <img class="ic_dd" src="../assets/dropdown.png">
+                <div id="hoveran"></div>
+                <ul class="dropdownList">
                     <li><a href="../profile/profile.php">Profil</a></li>
                     <li><a href="../history/history.php">Riwayat</a></li>
                     <li><a href="../logout/logout.php">Logout</a></li>
@@ -93,9 +93,9 @@ if (isset($_POST['insertBtn'])) {
             <div>
                 <h3>
                     <?php
-                        if (isset($alert)) {
-                            echo $alert; 
-                        }
+                    if (isset($alert)) {
+                        echo $alert;
+                    }
                     ?>
                 </h3>
             </div>

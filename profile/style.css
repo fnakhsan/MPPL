@@ -268,10 +268,22 @@ table {
     color: cyan;
 }
 
-.main {
-    /* position: absolute;
-    top: 196px; */
+.profile {
     margin: auto;
+}
+
+.profile > a {
+    position: absolute;
+    top: 180px;
+    left: 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    color: #0038FF;
+}
+
+.profile table {
+    
 }
 
 @media (max-width : 1600px) {
