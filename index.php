@@ -7,10 +7,10 @@ $user_db    = "root";
 $pass_db    = "";
 $nama_db    = "presensi";
 $koneksi    = mysqli_connect($host_db, $user_db, $pass_db, $nama_db);
+
 //atur variabel
 $err        = "";
 $username   = "";
-// $ingataku   = "";
 
 if (isset($_COOKIE['cookie_username'])) {
     $cookie_username = $_COOKIE['cookie_username'];
@@ -33,7 +33,6 @@ if (isset($_SESSION['session_username'])) {
 if (isset($_POST['submitBtn'])) {
     $username   = $_POST['username'];
     $password   = $_POST['password'];
-    // $ingataku   = $_POST['ingataku'];
 
     if ($username == '' or $password == '') {
         $err .= "<li>Silakan masukkan username dan juga password.</li>";

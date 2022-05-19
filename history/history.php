@@ -49,7 +49,9 @@ $query = mysqli_query($koneksi, "SELECT * FROM presensi_siswa where id_siswa = '
             </div>
         </div>
         <div class="main">
-            <a href="../main/main.php">Presensi</a>
+            <div class="link">
+                <a href="../main/main.php">Presensi</a>
+            </div>
             <div class="title">
                 <h2>Riwayat Presensi</h2>
             </div>

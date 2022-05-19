@@ -250,8 +250,6 @@ table {
     position: relative;
     display: flex;
     align-items: center;
-    /* margin-top: 18px;
-    margin-bottom: 18px; */
 }
 
 .container .header .dropdown ul li a {
@@ -280,9 +278,12 @@ table {
     flex-direction: column;
 }
 
-.container .main a {
+.container .main .link {
     margin-top: 164px;
     margin-left: 36px;
+}
+
+.container .main .link a {
     color: #0038FF;
     font-family: 'Montserrat', sans-serif;
     font-size: 32px;

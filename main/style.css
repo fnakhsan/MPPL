@@ -250,8 +250,6 @@ table {
     position: relative;
     display: flex;
     align-items: center;
-    /* margin-top: 18px;
-    margin-bottom: 18px; */
 }
 
 .container .header .dropdown ul li a {
@@ -276,8 +274,6 @@ table {
 }
 
 .main {
-    /* position: absolute;
-    top: 196px; */
     margin: auto;
 }
 
