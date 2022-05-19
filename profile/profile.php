@@ -1,16 +1,33 @@
 <?php
-
+session_start();
+if (!isset($_SESSION['session_username'])) {
+    header("location:../index.php");
+    exit();
+}
+$username = $_SESSION['session_username'];
 //atur koneksi ke database
 $host_db    = "localhost";
 $user_db    = "root";
 $pass_db    = "";
 $nama_db    = "presensi";
 $koneksi    = mysqli_connect($host_db, $user_db, $pass_db, $nama_db);
-//atur variabel
-$err        = "";
-$username   = "";
+
 // $ingataku   = "";
-$query = mysqli_query($koneksi, "SELECT * FROM tb_siswa ORDER BY id_siswa");
+$query = mysqli_query($koneksi, "SELECT * FROM tb_siswa WHERE id_siswa = '$username'");
+while ($user_data = mysqli_fetch_array($query)) {
+    $nama = $user_data['nama'];
+    $nis = $user_data['id_siswa'];
+    $jk = $user_data['jk'];
+    $tl = $user_data['tgl_lhr'];
+    $ja = "siswa";
+    // echo "<tr>";
+    // echo "<td><center>" . $user_data['nama'] . "</center></td>";
+    // echo "<td><center>" . $user_data['id_siswa'] . "</center></td>";
+    // echo "<td><center>" . $user_data['jk'] . "</center></td>";
+    // echo "<td><center>" . $user_data['tgl_lhr'] . "</center></td>";
+    // echo "<td><center>" . "siswa" . "</center></td>";
+    // echo "</tr>";
+}
 
 ?>
 
@@ -39,7 +56,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_siswa ORDER BY id_siswa");
             </div>
             <div class="dropdown">
                 <img class="ic_dd" src="../assets/dropdown.png">
-                <div id="hoveran"></div>
+                <div class="hoveran"></div>
                 <ul class="dropdownList">
                     <li><a href="../profile/profile.php">Profil</a></li>
                     <li><a href="../history/history.php">Riwayat</a></li>
@@ -47,9 +64,71 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_siswa ORDER BY id_siswa");
                 </ul>
             </div>
         </div>
-        <div class="profile">
+        <div class="main">
             <a href="../main/main.php">Presensi</a>
-            <table class="table" border=2>
+            <div class="title">
+                <h2>Profil Akun</h2>
+            </div>
+            <div class="profile">
+                <img src="../assets/Screenshot (1042).png" class="image">
+                <ul class="wrapper">
+                    <ul class="hint">
+                        <li>
+                            <h4>Nama :</h4>
+                        </li>
+                        <li>
+                            <h4>NIS :</h4>
+                        </li>
+                        <li>
+                            <h4>Jenis Kelamin :</h4>
+                        </li>
+                        <li>
+                            <h4>TL :</h4>
+                        </li>
+                        <li>
+                            <h4>Jenis Akun :</h4>
+                        </li>
+                    </ul>
+                    <ul class="userdata">
+                        <li>
+                            <h3>
+                                <?php
+                                echo "$nama";
+                                ?>
+                            </h3>
+                        </li>
+                        <li>
+                            <h3>
+                                <?php
+                                echo "$nis";
+                                ?>
+                            </h3>
+                        </li>
+                        <li>
+                            <h3>
+                                <?php
+                                echo "$jk";
+                                ?>
+                            </h3>
+                        </li>
+                        <li>
+                            <h3>
+                                <?php
+                                echo "$tl";
+                                ?>
+                            </h3>
+                        </li>
+                        <li>
+                            <h3>
+                                <?php
+                                echo "$ja";
+                                ?>
+                            </h3>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+            <!-- <table class="table" border=2>
                 <tr>
                     <th>Nama</th>
                     <th>NIS</th>
@@ -59,17 +138,17 @@ $query = mysqli_query($koneksi, "SELECT * FROM tb_siswa ORDER BY id_siswa");
                 </tr>
 
                 <?php
-                while ($user_data = mysqli_fetch_array($query)) {
-                    echo "<tr>";
-                    echo "<td><center>" . $user_data['nama'] . "</center></td>";
-                    echo "<td><center>" . $user_data['id_siswa'] . "</center></td>";
-                    echo "<td><center>" . $user_data['jk'] . "</center></td>";
-                    echo "<td><center>" . $user_data['tgl_lhr'] . "</center></td>";
-                    echo "<td><center>" . "siswa" . "</center></td>";
-                    echo "</tr>";
-                }
+                // while ($user_data = mysqli_fetch_array($query)) {
+                //     echo "<tr>";
+                //     echo "<td><center>" . $user_data['nama'] . "</center></td>";
+                //     echo "<td><center>" . $user_data['id_siswa'] . "</center></td>";
+                //     echo "<td><center>" . $user_data['jk'] . "</center></td>";
+                //     echo "<td><center>" . $user_data['tgl_lhr'] . "</center></td>";
+                //     echo "<td><center>" . "siswa" . "</center></td>";
+                //     echo "</tr>";
+                // }
                 ?>
-            </table>
+            </table> -->
         </div>
 </body>
 

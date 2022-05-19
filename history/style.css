@@ -275,10 +275,33 @@ table {
     color: #ffffff;
 }
 
-.main {
-    /* position: absolute;
-    top: 196px; */
-    margin: auto;
+.container .main {
+    display: flex;
+    flex-direction: column;
+}
+
+.container .main a {
+    margin-top: 164px;
+    margin-left: 36px;
+    color: #0038FF;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.container .main .title {
+    margin-top: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.container .main .title h2 {
+    color: #3B3C6C;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 72px;
+    font-weight: 700;
 }
 
 @media (max-width : 1600px) {
