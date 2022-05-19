@@ -5,6 +5,7 @@ if (!isset($_SESSION['session_username'])) {
     exit();
 }
 $username = $_SESSION['session_username'];
+print_r($username);
 // print_r($_SESSION);
 // print_r($_COOKIE); 
 $host_db    = "localhost";
@@ -12,15 +13,19 @@ $user_db    = "root";
 $pass_db    = "";
 $nama_db    = "presensi";
 $koneksi = mysqli_connect($host_db, $user_db, $pass_db, $nama_db);
+if (mysqli_connect_errno()) {
+    echo "Koneksi database gagal : " . mysqli_connect_error();
+}
 
-if(isset($_POST['submitBtn'])){
+if(isset($_POST['insertBtn'])){
     $directory = "../berkas/";
     $tgl_presensi = date("d-M-Y");
     $status = $_POST['status'];
     $valid = "NY";
     $file_name = basename($_FILES['bukti']['name']);
     move_uploaded_file($_FILES['bukti']['tmp_name'], $directory.$file_name);
-    mysqli_query($koneksi, "insert into presensi_siswa values('','$username','$tgl_presensi','$status','$valid','$file_name') where id_siswa = '$username'");
+    echo "$tgl_presensi , $status , $valid , $file_name";
+    mysqli_query($koneksi, "insert into presensi_siswa values('','$username','$tgl_presensi','$status','$valid','$file_name')");
     echo "file berhasil di upload";
 }
 ?>
@@ -87,7 +92,7 @@ if(isset($_POST['submitBtn'])){
                 <div class="file">
                     <input type="file" name="bukti" accept="image/*">
                 </div>
-                <input type="submit" name="submitBtn" value="Submit" class="submitBtn" />
+                <input type="submit" name="insertBtn" value="Submit" class="submitBtn" />
             </form>
         </div>
     </div>
