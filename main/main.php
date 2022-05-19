@@ -52,7 +52,7 @@ if (isset($_POST['insertBtn'])) {
             </div>
             <div class="dropdown">
                 <img class="ic_dd" src="../assets/dropdown.png">
-                <div id="hoveran"></div>
+                <div class="hoveran"></div>
                 <ul class="dropdownList">
                     <li><a href="../profile/profile.php">Profil</a></li>
                     <li><a href="../history/history.php">Riwayat</a></li>
