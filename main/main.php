@@ -5,28 +5,24 @@ if (!isset($_SESSION['session_username'])) {
     exit();
 }
 $username = $_SESSION['session_username'];
-print_r($username);
-// print_r($_SESSION);
-// print_r($_COOKIE); 
 $host_db    = "localhost";
 $user_db    = "root";
 $pass_db    = "";
 $nama_db    = "presensi";
 $koneksi = mysqli_connect($host_db, $user_db, $pass_db, $nama_db);
 if (mysqli_connect_errno()) {
-    echo "Koneksi database gagal : " . mysqli_connect_error();
+    $alert = "Koneksi database gagal : " . mysqli_connect_error();
 }
 
-if(isset($_POST['insertBtn'])){
+if (isset($_POST['insertBtn'])) {
     $directory = "../berkas/";
-    $tgl_presensi = date("d-M-Y");
+    $tgl_presensi = date("Y-m-d");
     $status = $_POST['status'];
     $valid = "NY";
     $file_name = basename($_FILES['bukti']['name']);
-    move_uploaded_file($_FILES['bukti']['tmp_name'], $directory.$file_name);
-    echo "$tgl_presensi , $status , $valid , $file_name";
+    move_uploaded_file($_FILES['bukti']['tmp_name'], $directory . $file_name);
     mysqli_query($koneksi, "insert into presensi_siswa values('','$username','$tgl_presensi','$status','$valid','$file_name')");
-    echo "file berhasil di upload";
+    $alert = "Presensi berhasil dilakukan";
 }
 ?>
 
@@ -94,6 +90,15 @@ if(isset($_POST['insertBtn'])){
                 </div>
                 <input type="submit" name="insertBtn" value="Submit" class="submitBtn" />
             </form>
+            <div>
+                <h3>
+                    <?php
+                        if (isset($alert)) {
+                            echo $alert; 
+                        }
+                    ?>
+                </h3>
+            </div>
         </div>
     </div>
 </body>
