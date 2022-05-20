@@ -5,6 +5,8 @@ if (!isset($_SESSION['session_username'])) {
     exit();
 }
 $username = $_SESSION['session_username'];
+$ja = $_SESSION['session_account'];
+
 //atur koneksi ke database
 $host_db    = "localhost";
 $user_db    = "root";
@@ -12,13 +14,22 @@ $pass_db    = "";
 $nama_db    = "presensi";
 $koneksi    = mysqli_connect($host_db, $user_db, $pass_db, $nama_db);
 
-$query = mysqli_query($koneksi, "SELECT * FROM tb_siswa WHERE id_siswa = '$username'");
-while ($user_data = mysqli_fetch_array($query)) {
-    $nama = $user_data['nama'];
-    $nis = $user_data['id_siswa'];
-    $jk = $user_data['jk'];
-    $tl = $user_data['tgl_lhr'];
-    $ja = "siswa";
+if ($ja == "Siswa") {
+    $query = mysqli_query($koneksi, "SELECT * FROM tb_siswa WHERE id_siswa = '$username'");
+    while ($user_data = mysqli_fetch_array($query)) {
+        $nama = $user_data['nama'];
+        $nis = $user_data['id_siswa'];
+        $jk = $user_data['jk'];
+        $tl = $user_data['tgl_lhr'];
+    }
+} elseif ($ja == "Guru") {
+    $query = mysqli_query($koneksi, "SELECT * FROM tb_guru WHERE id_guru = '$username'");
+    while ($user_data = mysqli_fetch_array($query)) {
+        $nama = $user_data['nama'];
+        $nis = $user_data['id_guru'];
+        $jk = $user_data['jk'];
+        $tl = $user_data['tgl_lhr'];
+    }
 }
 
 ?>

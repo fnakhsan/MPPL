@@ -19,9 +19,19 @@ if (isset($_COOKIE['cookie_username'])) {
     $sql1 = "select * from tb_siswa where id_siswa = '$cookie_username'";
     $q1   = mysqli_query($koneksi, $sql1);
     $r1   = mysqli_fetch_array($q1);
-    if ($r1['pw_siswa'] == $cookie_password) {
+
+    $sql2 = "select * from tb_guru where id_guru = '$cookie_username'";
+    $q2   = mysqli_query($koneksi, $sql2);
+    $r2   = mysqli_fetch_array($q2);
+
+    if ($r1['pw_siswa'] == $cookie_password && $r2['id_siswa'] == $cookie_username) {
         $_SESSION['session_username'] = $cookie_username;
         $_SESSION['session_password'] = $cookie_password;
+        $_SESSION['session_account'] = "Siswa";
+    } elseif ($r2['pw_guru'] == $cookie_password && $r2['id_guru'] == $cookie_username) {
+        $_SESSION['session_username'] = $cookie_username;
+        $_SESSION['session_password'] = $cookie_password;
+        $_SESSION['session_account'] = "Guru";
     }
 }
 
@@ -41,15 +51,32 @@ if (isset($_POST['submitBtn'])) {
         $q1   = mysqli_query($koneksi, $sql1);
         $r1   = mysqli_fetch_array($q1);
 
+        $sql2 = "select * from tb_guru where id_guru = '$username'";
+        $q2   = mysqli_query($koneksi, $sql2);
+        $r2   = mysqli_fetch_array($q2);
+
+        $na = 1;
         if (empty($r1['id_siswa'])) {
-            $err .= "Username <b>$username</b> tidak tersedia.";
+            if (empty($r2['id_guru'])) {
+                $err .= "Username <b>$username</b> tidak tersedia.";
+            } else {
+                $na = 2;
+            }
         } elseif ($r1['pw_siswa'] != md5($password)) {
-            $err .= "Password yang dimasukkan tidak sesuai.";
+            if ($r2['pw_guru'] != md5($password)) {
+                $err .= "Password yang dimasukkan tidak sesuai.";
+            }
         }
 
         if (empty($err)) {
             $_SESSION['session_username'] = $username; //server
             $_SESSION['session_password'] = md5($password);
+            
+            if ($na == 1) {
+                $_SESSION['session_account'] = "Siswa";
+            } elseif($na == 2) {
+                $_SESSION['session_account'] = "Guru";
+            }
 
             $cookie_name = "cookie_username";
             $cookie_value = $username;
@@ -60,6 +87,11 @@ if (isset($_POST['submitBtn'])) {
             $cookie_value = md5($password);
             $cookie_time = time() + (60 * 60 * 2);
             setcookie($cookie_name, $cookie_value, $cookie_time, "/");
+
+            // $cookie_name = "cookie_account";
+            // $cookie_value = $_SESSION['session_account'];
+            // $cookie_time = time() + (60 * 60 * 2);
+            // setcookie($cookie_name, $cookie_value, $cookie_time, "/");
 
             header("location:./main/main.php");
         }
