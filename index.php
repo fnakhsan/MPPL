@@ -16,6 +16,9 @@ if (isset($_COOKIE['cookie_username'])) {
     $cookie_username = $_COOKIE['cookie_username'];
     $cookie_password = $_COOKIE['cookie_password'];
 
+    echo $cookie_username;
+    echo $cookie_password;
+
     $sql1 = "select * from tb_siswa where id_siswa = '$cookie_username'";
     $q1   = mysqli_query($koneksi, $sql1);
     $r1   = mysqli_fetch_array($q1);
@@ -24,7 +27,7 @@ if (isset($_COOKIE['cookie_username'])) {
     $q2   = mysqli_query($koneksi, $sql2);
     $r2   = mysqli_fetch_array($q2);
 
-    if ($r1['pw_siswa'] == $cookie_password && $r2['id_siswa'] == $cookie_username) {
+    if ($r1['pw_siswa'] == $cookie_password && $r1['id_siswa'] == $cookie_username) {
         $_SESSION['session_username'] = $cookie_username;
         $_SESSION['session_password'] = $cookie_password;
         $_SESSION['session_account'] = "Siswa";
