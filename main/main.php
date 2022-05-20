@@ -74,6 +74,10 @@ if (isset($_POST['insertBtn'])) {
                 <h2>Presensi</h2>
             </div>
             <div class="today">
+                <div class="icon">
+                    <img src="../assets/ic_calendar_today_black_24dp.png">
+                    <h5>Hari & Tanggal</h5>
+                </div>
                 <h3><?php
                     $date = date("l, d M Y");
                     echo "$date";
@@ -95,9 +99,12 @@ if (isset($_POST['insertBtn'])) {
                     </label>
                 </div>
                 <div class="file">
+                    <h3>Bukti Presensi</h3>
                     <input type="file" name="bukti" accept="image/*">
                 </div>
-                <input type="submit" name="insertBtn" value="Submit" class="submitBtn" />
+                <div class="submit">
+                    <input type="submit" name="insertBtn" value="Submit" class="insertBtn" />
+                </div>
             </form>
             <div>
                 <h3>
