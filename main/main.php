@@ -4,6 +4,8 @@ if (!isset($_SESSION['session_username'])) {
     header("location:../index.php");
     exit();
 }
+$ja = $_SESSION['session_account'];
+
 $username = $_SESSION['session_username'];
 $host_db    = "localhost";
 $user_db    = "root";
@@ -21,8 +23,15 @@ if (isset($_POST['insertBtn'])) {
     $valid = "NY";
     $file_name = basename($_FILES['bukti']['name']);
     move_uploaded_file($_FILES['bukti']['tmp_name'], $directory . $file_name);
-    mysqli_query($koneksi, "insert into presensi_siswa values('','$username','$tgl_presensi','$status','$valid','$file_name')");
-    $alert = "Presensi berhasil dilakukan";
+    if ($ja == "Siswa") {
+        mysqli_query($koneksi, "insert into presensi_siswa values('','$username','$tgl_presensi','$status','$valid','$file_name')");
+        $alert = "Presensi berhasil dilakukan";
+    } elseif ($ja == "Guru") {
+        mysqli_query($koneksi, "insert into presensi_guru values('','$username','$tgl_presensi','$status','$valid','$file_name')");
+        $alert = "Presensi berhasil dilakukan";
+    } else {
+        $alert = "Presensi tidak berhasil dilakukan";
+    }
 }
 ?>
 

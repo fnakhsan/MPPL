@@ -5,6 +5,7 @@ if (!isset($_SESSION['session_username'])) {
     exit();
 }
 $username = $_SESSION['session_username'];
+$ja = $_SESSION['session_account'];
 //atur koneksi ke database
 $host_db    = "localhost";
 $user_db    = "root";
@@ -12,7 +13,12 @@ $pass_db    = "";
 $nama_db    = "presensi";
 $koneksi    = mysqli_connect($host_db, $user_db, $pass_db, $nama_db);
 
-$query = mysqli_query($koneksi, "SELECT * FROM presensi_siswa where id_siswa = '$username' ORDER BY id_presensi ASC");
+if ($ja == "Siswa") {
+    $query = mysqli_query($koneksi, "SELECT * FROM presensi_siswa where id_siswa = '$username' ORDER BY id_presensi ASC");
+} elseif ($ja == "Guru") {
+    $query = mysqli_query($koneksi, "SELECT * FROM presensi_guru where id_guru = '$username' ORDER BY id_presensi ASC");
+}
+
 ?>
 
 <html lang="en">
