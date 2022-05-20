@@ -61,24 +61,28 @@ if ($ja == "Siswa") {
             <div class="title">
                 <h2>Riwayat Presensi</h2>
             </div>
-            <table width='80%' border=2>
-                <tr>
-                    <th>Hari dan Tanggal</th>
-                    <th>Status</th>
-                    <th>keterangan</th>
-                    <th>Validasi</th>
-                </tr>
-
-                <?php
-                while ($user_data = mysqli_fetch_array($query)) {
-                    echo "<tr>";
-                    echo "<td><center>" . $user_data['tgl_presensi'] . "</center></td>";
-                    echo "<td><center>" . $user_data['status'] . "</center></td>";
-                    echo "<td><center>" . $user_data['keterangan'] . "</center></td>";
-                    echo "<td><center>" . $user_data['valid'] . "</center></td>";
-                    echo "</tr>";
-                }
-                ?>
+            <table class="table" border="1">
+                <thead>
+                    <tr>
+                        <th>Hari dan Tanggal</th>
+                        <th>Status</th>
+                        <th>keterangan</th>
+                        <th>Validasi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    while ($user_data = mysqli_fetch_array($query)) {
+                        $tgl = date("l, d M Y", strtotime($user_data['tgl_presensi']));
+                        echo "<tr>";
+                        echo "<td>" . $tgl . "</td>";
+                        echo "<td>" . $user_data['status'] . "</td>";
+                        echo "<td>" . $user_data['keterangan'] . "</td>";
+                        echo "<td>" . $user_data['valid'] . "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
             </table>
         </div>
     </div>

@@ -49,7 +49,7 @@ if ($ja == "Siswa") {
     <div class="container">
         <div class="header">
             <div class="logo">
-                <img src="../assets/logo-all.svg">
+                <img src="../assets/logo-all.png">
             </div>
             <div class="title">
                 <h1>Sistem Informasi Presensi</h1>
@@ -75,7 +75,7 @@ if ($ja == "Siswa") {
                 <h2>Profil Akun</h2>
             </div>
             <div class="profile">
-                <img src="../assets/Screenshot (1042).png" class="image">
+                <img src="../assets/profilepicture.jpg" class="image">
                 <ul class="wrapper">
                     <ul class="hint">
                         <li>

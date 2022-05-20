@@ -321,6 +321,8 @@ body {
     border-radius: 10px;
     border-color: #000000;
     border-width: 2px;
+    border-style: solid;
+    box-sizing: border-box;
 }
 
 .container .main .profile .wrapper {
