@@ -19,18 +19,22 @@ if (mysqli_connect_errno()) {
 if (isset($_POST['insertBtn'])) {
     $directory = "../berkas/";
     $tgl_presensi = date("Y-m-d");
-    $status = $_POST['status'];
-    $valid = "NY";
-    $file_name = basename($_FILES['bukti']['name']);
-    move_uploaded_file($_FILES['bukti']['tmp_name'], $directory . $file_name);
-    if ($ja == "Siswa") {
-        mysqli_query($koneksi, "insert into presensi_siswa values('','$username','$tgl_presensi','$status','$valid','$file_name')");
-        $alert = "Presensi berhasil dilakukan";
-    } elseif ($ja == "Guru") {
-        mysqli_query($koneksi, "insert into presensi_guru values('','$username','$tgl_presensi','$status','$valid','$file_name')");
-        $alert = "Presensi berhasil dilakukan";
+    if (isset($_POST['status'])) {
+        $status = $_POST['status'];
+        $valid = "NY";
+        $file_name = basename($_FILES['bukti']['name']);
+        move_uploaded_file($_FILES['bukti']['tmp_name'], $directory . $file_name);
+        if ($ja == "Siswa") {
+            mysqli_query($koneksi, "insert into presensi_siswa values('','$username','$tgl_presensi','$status','$valid','$file_name')");
+            $alert = "Presensi berhasil dilakukan";
+        } elseif ($ja == "Guru") {
+            mysqli_query($koneksi, "insert into presensi_guru values('','$username','$tgl_presensi','$status','$valid','$file_name')");
+            $alert = "Presensi berhasil dilakukan";
+        } else {
+            $alert = "Presensi tidak berhasil dilakukan";
+        }
     } else {
-        $alert = "Presensi tidak berhasil dilakukan";
+        $alert = "Harap menambahkan status presensi";
     }
 }
 ?>

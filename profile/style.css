@@ -403,9 +403,6 @@ body {
         left: 65px;
     }
 
-    .container .header .title .dropdown {
-        left: 10px;
-    }
 }
 
 @media (max-width : 660px) {
