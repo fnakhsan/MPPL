@@ -82,7 +82,13 @@ if ($ja == "Siswa") {
                             <h4>Nama :</h4>
                         </li>
                         <li>
-                            <h4>NIS :</h4>
+                            <h4><?php
+                                if ($ja == "Siswa") {
+                                    echo "NIS :";
+                                } elseif ($ja == "Guru") {
+                                    echo "NIP :";
+                                }
+                                ?></h4>
                         </li>
                         <li>
                             <h4>Jenis Kelamin :</h4>
