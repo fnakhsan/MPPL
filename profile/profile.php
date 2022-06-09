@@ -88,7 +88,8 @@ if ($ja == "Siswa") {
                                 } elseif ($ja == "Guru") {
                                     echo "NIP :";
                                 }
-                                ?></h4>
+                                ?>
+                            </h4>
                         </li>
                         <li>
                             <h4>Jenis Kelamin :</h4>
