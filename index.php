@@ -27,6 +27,10 @@ if (isset($_COOKIE['cookie_username'])) {
     $q2   = mysqli_query($koneksi, $sql2);
     $r2   = mysqli_fetch_array($q2);
 
+    $sql3 = "select * from tb_admin where id_admin = '$cookie_username'";
+    $q3   = mysqli_query($koneksi, $sql3);
+    $r3   = mysqli_fetch_array($q3);
+
     if ($r1['pw_siswa'] == $cookie_password && $r1['id_siswa'] == $cookie_username) {
         $_SESSION['session_username'] = $cookie_username;
         $_SESSION['session_password'] = $cookie_password;
@@ -35,11 +39,21 @@ if (isset($_COOKIE['cookie_username'])) {
         $_SESSION['session_username'] = $cookie_username;
         $_SESSION['session_password'] = $cookie_password;
         $_SESSION['session_account'] = "Guru";
+    } elseif ($r3['pw_admin'] == $cookie_password && $r3['id_admin'] == $cookie_username) {
+        $_SESSION['session_username'] = $cookie_username;
+        $_SESSION['session_password'] = $cookie_password;
+        $_SESSION['session_account'] = "Admin";
     }
 }
 
 if (isset($_SESSION['session_username'])) {
-    header("location:./main/main.php");
+    if (isset($_SESSION['session_account'])) {
+        if ($_SESSION['session_account'] == "Admin")
+            header("location:./admin/admin.php");
+        else {
+            header("location:./main/main.php");
+        }
+    }
     exit();
 }
 
@@ -58,28 +72,32 @@ if (isset($_POST['submitBtn'])) {
         $q2   = mysqli_query($koneksi, $sql2);
         $r2   = mysqli_fetch_array($q2);
 
+        $sql3 = "select * from tb_admin where id_admin = '$username'";
+        $q3   = mysqli_query($koneksi, $sql3);
+        $r3   = mysqli_fetch_array($q3);
+
         $na = 1;
         if (empty($r1['id_siswa'])) {
             if (empty($r2['id_guru'])) {
-                $err .= "Username <b>$username</b> tidak tersedia.";
+                if (empty($r3['id_admin'])) {
+                    $err .= "Username <b>$username</b> tidak tersedia.";
+                } else {
+                    $na = 3;
+                }
             } else {
                 $na = 2;
             }
         } elseif ($r1['pw_siswa'] != md5($password)) {
             if ($r2['pw_guru'] != md5($password)) {
-                $err .= "Password yang dimasukkan tidak sesuai.";
+                if ($r3['pw_admin'] != md5($password)) {
+                    $err .= "Password yang dimasukkan tidak sesuai.";
+                }
             }
         }
 
         if (empty($err)) {
             $_SESSION['session_username'] = $username; //server
             $_SESSION['session_password'] = md5($password);
-            
-            if ($na == 1) {
-                $_SESSION['session_account'] = "Siswa";
-            } elseif($na == 2) {
-                $_SESSION['session_account'] = "Guru";
-            }
 
             $cookie_name = "cookie_username";
             $cookie_value = $username;
@@ -91,12 +109,22 @@ if (isset($_POST['submitBtn'])) {
             $cookie_time = time() + (60 * 60 * 2);
             setcookie($cookie_name, $cookie_value, $cookie_time, "/");
 
+            if ($na == 1) {
+                $_SESSION['session_account'] = "Siswa";
+                header("location:./main/main.php");
+            } elseif ($na == 2) {
+                $_SESSION['session_account'] = "Guru";
+                header("location:./main/main.php");
+            } elseif ($na == 3) {
+                $_SESSION['session_account'] = "Admin";
+                header("location:./admin/admin.php");
+            }
+
             // $cookie_name = "cookie_account";
             // $cookie_value = $_SESSION['session_account'];
             // $cookie_time = time() + (60 * 60 * 2);
-            // setcookie($cookie_name, $cookie_value, $cookie_time, "/");
+            // setcookie($cookie_name, $cookie_value, $cookie_time, "/");      
 
-            header("location:./main/main.php");
         }
     }
 }

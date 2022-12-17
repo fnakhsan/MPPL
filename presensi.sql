@@ -19,6 +19,16 @@ CREATE TABLE tb_guru(
    tgl_lhr DATE, 
    PRIMARY KEY (id_guru) 
 );
+CREATE TABLE tb_admin(
+   id_admin VARCHAR(16) NOT NULL,
+   pw_admin VARCHAR(32) NOT NULL, 
+   nama VARCHAR(40) NOT NULL, 
+   jk VARCHAR(3) NOT NULL, 
+   alamat VARCHAR(40) NOT NULL, 
+   no_hp VARCHAR(15) NOT NULL,
+   tgl_lhr DATE, 
+   PRIMARY KEY (id_admin) 
+);
 CREATE TABLE presensi_siswa(
    id_presensi INT(11) NOT NULL AUTO_INCREMENT,
    id_siswa VARCHAR(16) NOT NULL, 
