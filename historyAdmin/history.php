@@ -69,7 +69,7 @@ $query2 = mysqli_query($koneksi, "SELECT id_siswa FROM tb_siswa ORDER BY id_sisw
                         <?php
                         while ($user_data = mysqli_fetch_array($query1)) {
                             echo "<tr>";
-                            echo "<td>" . $user_data['id_guru'] . "</td>";
+                            echo "<td> <a href=\"../detail/detail.php?id=" . $user_data['id_guru'] . "\">" . $user_data['id_guru'] . "</a> </td>";
                             echo "</tr>";
                         }
                         ?>
@@ -85,7 +85,7 @@ $query2 = mysqli_query($koneksi, "SELECT id_siswa FROM tb_siswa ORDER BY id_sisw
                         <?php
                         while ($user_data = mysqli_fetch_array($query2)) {
                             echo "<tr>";
-                            echo "<td>" . $user_data['id_siswa'] . "</td>";
+                            echo "<td> <a href=\"../detail/detail.php?id=" . $user_data['id_siswa'] . "\">" . $user_data['id_siswa'] . "</a> </td>";
                             echo "</tr>";
                         }
                         ?>
