@@ -5,7 +5,6 @@ if (!isset($_SESSION['session_username'])) {
     exit();
 }
 $username = $_SESSION['session_username'];
-$ja = $_SESSION['session_account'];
 $id = $_GET['id'];
 
 //atur koneksi ke database
@@ -27,14 +26,40 @@ if (!empty($r1['id_guru'])) {
     $nis = $r1['id_guru'];
     $jk = $r1['jk'];
     $tl = $r1['tgl_lhr'];
+    $ja = "Guru";
+    $query = mysqli_query($koneksi, "SELECT * FROM presensi_guru where id_guru = '$nis' ORDER BY id_presensi DESC");
 } else if (!empty($r2['id_siswa'])) {
     $nama = $r2['nama'];
     $nis = $r2['id_siswa'];
     $jk = $r2['jk'];
     $tl = $r2['tgl_lhr'];
+    $ja = "Siswa";
+    $query = mysqli_query($koneksi, "SELECT * FROM presensi_siswa where id_siswa = '$nis' ORDER BY id_presensi DESC");
 } else {
-    header("../historyAdmin/history.php");
+    header("location:../historyAdmin/history.php");
     exit();
+}
+
+if (isset($_POST['updateBtn'])) {
+    while ($user_data = mysqli_fetch_array($query)) {
+        if (isset($_POST['status']) && isset($_POST['valid'])) {
+            $status = $_POST['status' . $user_data['id_presensi']];
+            $validate = $_POST['validate' . $user_data['id_presensi']];
+            $id = $_POST['id'];
+
+            if ($ja == "Siswa") {
+                mysqli_query($koneksi, "update presensi_siswa set status = '$status', valid = '$validate' where id_presensi = '$id'");
+                $alert = "Presensi berhasil dilakukan";
+            } elseif ($ja == "Guru") {
+                mysqli_query($koneksi, "update presensi_guru set status = '$status', valid = '$validate' where id_presensi = '$id'");
+                $alert = "Presensi berhasil dilakukan";
+            } else {
+                $alert = "Presensi tidak berhasil dilakukan";
+            }
+        } else {
+            $alert = "Harap menambahkan status presensi";
+        }
+    }
 }
 
 ?>
@@ -74,10 +99,10 @@ if (!empty($r1['id_guru'])) {
         </div>
         <div class="main">
             <div class="link">
-                <a href="../main/main.php">Presensi</a>
+                <a href="../historyAdmin/history.php">Kembali</a>
             </div>
             <div class="title">
-                <h2>Profil Akun</h2>
+                <h2>Riwayat Presensi</h2>
             </div>
             <div class="profile">
                 <img src="../assets/profilepicture.jpg" class="image">
@@ -145,7 +170,46 @@ if (!empty($r1['id_guru'])) {
                     </ul>
                 </ul>
             </div>
+            <form action="/action_page.php">
+                <table class="table" border="1">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Status</th>
+                            <th>keterangan</th>
+                            <th>Validasi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        while ($user_data = mysqli_fetch_array($query)) {
+                            $status = '
+                            <label for="hadir' . $user_data['id_presensi'] . '"><input type="radio" id="hadir' . $user_data['id_presensi'] . '" name="status' . $user_data['id_presensi'] . '" value="hadir">Hadir</label>                    
+                            <label for="sakit' . $user_data['id_presensi'] . '"><input type="radio" id="sakit' . $user_data['id_presensi'] . '" name="status' . $user_data['id_presensi'] . '" value="sakit">Sakit</label>                        
+                            <label for="izin' . $user_data['id_presensi'] . '"><input type="radio" id="izin' . $user_data['id_presensi'] . '" name="status' . $user_data['id_presensi'] . '" value="izin">Izin</label>
+                            <label for="alpha' . $user_data['id_presensi'] . '"><input type="radio" id="alpha' . $user_data['id_presensi'] . '" name="status' . $user_data['id_presensi'] . '" value="alpha">Alpha</label>
+                            ';
+                            $validate = '
+                            <label for="not_yet' . $user_data['id_presensi'] . '"><input type="radio" id="not_yet' . $user_data['id_presensi'] . '" name="validate' . $user_data['id_presensi'] . '" value="NY">NOT YET</label>                    
+                            <label for="no' . $user_data['id_presensi'] . '"><input type="radio" id="no' . $user_data['id_presensi'] . '" name="validate' . $user_data['id_presensi'] . '" value="N">NO</label>                        
+                            <label for="yes' . $user_data['id_presensi'] . '"><input type="radio" id="yes' . $user_data['id_presensi'] . '" name="validate' . $user_data['id_presensi'] . '" value="Y">YES</label>
+                            ';
+                            $tgl = date("l, d M Y", strtotime($user_data['tgl_presensi']));
+                            echo "<input type=\"hidden\" name=\"id\" value=\"" . $user_data['id_presensi'] . "\">";
+                            echo "<tr>";
+                            echo "<td>" . $tgl . "</td>";
+                            echo "<td>" . $user_data['status'] . $status . "</td>";
+                            echo "<td> <a href=\"../berkas/" . $user_data['keterangan'] . "\" target=\"_blank\" rel=\"noopener noreferrer\">" . $user_data['keterangan'] . "</a> </td>";
+                            echo "<td>" . $user_data['valid'] . $validate . "</td>";
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <input type="submit" name="updateBtn" value="Submit" class="submit" />
+            </form>
         </div>
+    </div>
 </body>
 
 </html>
