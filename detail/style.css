@@ -418,8 +418,8 @@ body {
 
 .container .main .submit {
     background-color: #FF2667;
-    width: 400px;
-    height: 60px;
+    width: 100px;
+    height: 30px;
     margin-top: 32px;
     margin-left: auto;
     margin-right: auto;
@@ -433,13 +433,14 @@ body {
     justify-content: center;
     color: #000000;
     font-family: 'Montserrat', sans-serif;
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 500;
     text-transform: uppercase;
 }
 
 .container .main .submit:hover {
     opacity: .8;
+    cursor: pointer;
 }
 
 @media (max-width : 1600px) {
