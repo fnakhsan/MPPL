@@ -16,9 +16,6 @@ if (isset($_COOKIE['cookie_username'])) {
     $cookie_username = $_COOKIE['cookie_username'];
     $cookie_password = $_COOKIE['cookie_password'];
 
-    echo $cookie_username;
-    echo $cookie_password;
-
     $sql1 = "select * from tb_siswa where id_siswa = '$cookie_username'";
     $q1   = mysqli_query($koneksi, $sql1);
     $r1   = mysqli_fetch_array($q1);
@@ -77,22 +74,27 @@ if (isset($_POST['submitBtn'])) {
         $r3   = mysqli_fetch_array($q3);
 
         $na = 1;
-        if (empty($r1['id_siswa'])) {
-            if (empty($r2['id_guru'])) {
-                if (empty($r3['id_admin'])) {
-                    $err .= "Username <b>$username</b> tidak tersedia.";
-                } else {
-                    $na = 3;
-                }
+
+        if (!empty($r1['id_siswa'])) {
+            if ($r1['pw_siswa'] != md5($password)) {
+                $na = 1;
             } else {
-                $na = 2;
+                $err = "Password yang dimasukkan tidak sesuai.";
             }
-        } elseif ($r1['pw_siswa'] != md5($password)) {
+        } else if (!empty($r2['id_guru'])) {
             if ($r2['pw_guru'] != md5($password)) {
-                if ($r3['pw_admin'] != md5($password)) {
-                    $err .= "Password yang dimasukkan tidak sesuai.";
-                }
+                $na = 2;
+            } else {
+                $err = "Password yang dimasukkan tidak sesuai.";
             }
+        } elseif (!empty($r3['id_admin'])) {
+            if ($r3['pw_admin'] != md5($password)) {
+                $na = 3;
+            } else {
+                $err = "Password yang dimasukkan tidak sesuai.";
+            }
+        } else {
+            $err = "Username <b>$username</b> tidak tersedia.";
         }
 
         if (empty($err)) {
@@ -123,8 +125,7 @@ if (isset($_POST['submitBtn'])) {
             // $cookie_name = "cookie_account";
             // $cookie_value = $_SESSION['session_account'];
             // $cookie_time = time() + (60 * 60 * 2);
-            // setcookie($cookie_name, $cookie_value, $cookie_time, "/");      
-
+            // setcookie($cookie_name, $cookie_value, $cookie_time, "/");
         }
     }
 }

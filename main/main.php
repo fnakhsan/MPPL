@@ -5,7 +5,10 @@ if (!isset($_SESSION['session_username'])) {
     exit();
 }
 $ja = $_SESSION['session_account'];
-
+if ($ja == "Admin") {
+    header("location:../admin/admin.php");
+    exit();
+}
 $username = $_SESSION['session_username'];
 $host_db    = "localhost";
 $user_db    = "root";

@@ -292,7 +292,7 @@ body {
 }
 
 .container .main .title {
-    margin-top: 200px;
+    margin-top: 32px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -308,7 +308,7 @@ body {
 
 .container .main .con {
     width: 1220px;
-    margin-top: 80px;
+    margin-top: 72px;
     margin-left: auto;
     margin-right: auto;
     display: flex;

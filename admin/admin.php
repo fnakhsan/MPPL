@@ -46,16 +46,13 @@ $query2 = mysqli_query($koneksi, "SELECT * FROM presensi_siswa where tgl_presens
                 <div class="hoveran"></div>
                 <ul class="dropdownList">
                     <li><a href="../profile/profile.php">Profil</a></li>
-                    <li><a href="../historyAdmin/history.php">Riwayat</a></li>
+                    <li><a href="../history-admin/history.php">Riwayat</a></li>
                     <li><a href="../logout/logout.php">Logout</a></li>
                 </ul>
             </div>
         </div>
         <form action="/action_page.php">
             <div class="main">
-                <div class="link">
-                    <a href="../main/main.php">Presensi</a>
-                </div>
                 <div class="title">
                     <h2>Presensi Hari Ini</h2>
                 </div>

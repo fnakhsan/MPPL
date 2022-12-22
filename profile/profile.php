@@ -18,7 +18,7 @@ if ($ja == "Siswa") {
     $query = mysqli_query($koneksi, "SELECT * FROM tb_siswa WHERE id_siswa = '$username'");
     while ($user_data = mysqli_fetch_array($query)) {
         $nama = $user_data['nama'];
-        $nis = $user_data['id_siswa'];
+        $id = $user_data['id_siswa'];
         $jk = $user_data['jk'];
         $tl = $user_data['tgl_lhr'];
     }
@@ -26,7 +26,15 @@ if ($ja == "Siswa") {
     $query = mysqli_query($koneksi, "SELECT * FROM tb_guru WHERE id_guru = '$username'");
     while ($user_data = mysqli_fetch_array($query)) {
         $nama = $user_data['nama'];
-        $nis = $user_data['id_guru'];
+        $id = $user_data['id_guru'];
+        $jk = $user_data['jk'];
+        $tl = $user_data['tgl_lhr'];
+    }
+} elseif ($ja == "Admin") {
+    $query = mysqli_query($koneksi, "SELECT * FROM tb_admin WHERE id_admin = '$username'");
+    while ($user_data = mysqli_fetch_array($query)) {
+        $nama = $user_data['nama'];
+        $id = $user_data['id_admin'];
         $jk = $user_data['jk'];
         $tl = $user_data['tgl_lhr'];
     }
@@ -69,7 +77,13 @@ if ($ja == "Siswa") {
         </div>
         <div class="main">
             <div class="link">
-                <a href="../main/main.php">Presensi</a>
+                <?php
+                if ($ja == "Admin") {
+                    echo '<a href="../admin/admin.php">Kembali</a>';
+                } else {
+                    echo '<a href="../main/main.php">Presensi</a>';
+                }
+                ?>
             </div>
             <div class="title">
                 <h2>Profil Akun</h2>
@@ -87,6 +101,8 @@ if ($ja == "Siswa") {
                                     echo "NIS :";
                                 } elseif ($ja == "Guru") {
                                     echo "NIP :";
+                                } elseif ($ja == "Admin") {
+                                    echo "ID :";
                                 }
                                 ?>
                             </h4>
@@ -112,7 +128,7 @@ if ($ja == "Siswa") {
                         <li>
                             <h3>
                                 <?php
-                                echo "$nis";
+                                echo "$id";
                                 ?>
                             </h3>
                         </li>

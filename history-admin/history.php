@@ -52,6 +52,9 @@ $query2 = mysqli_query($koneksi, "SELECT id_siswa FROM tb_siswa ORDER BY id_sisw
             </div>
         </div>
         <div class="main">
+            <div class="link">
+                <a href="../admin/admin.php">Kembali</a>
+            </div>
             <div class="title">
                 <h2>Riwayat Presensi</h2>
             </div>

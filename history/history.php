@@ -6,6 +6,10 @@ if (!isset($_SESSION['session_username'])) {
 }
 $username = $_SESSION['session_username'];
 $ja = $_SESSION['session_account'];
+if ($ja == "Admin") {
+    header("location:../admin/admin.php");
+    exit();
+}
 //atur koneksi ke database
 $host_db    = "localhost";
 $user_db    = "root";

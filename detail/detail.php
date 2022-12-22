@@ -178,7 +178,6 @@ if (isset($_POST['update'])) {
                         <th>Status</th>
                         <th>keterangan</th>
                         <th>Validasi</th>
-                        <th>Submit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -203,10 +202,10 @@ if (isset($_POST['update'])) {
                             echo "<td>" . $user_data['status'] . $status . "</td>";
                             echo "<td> <a href=\"../berkas/" . $user_data['keterangan'] . "\" target=\"_blank\" rel=\"noopener noreferrer\">" . $user_data['keterangan'] . "</a> </td>";
                             echo "<td>" . $user_data['valid'] . $validate . "</td>";
-                            echo "<td> <input type=\"submit\" name=\"update\" value=\"Submit\" class=\"submit\" /> </td>";
                             echo "</tr>";
                         }
                         ?>
+                        <input type="submit" name="update" value="Submit" class="submit" />
                     </form>;
                 </tbody>
             </table>

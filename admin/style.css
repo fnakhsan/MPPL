@@ -278,11 +278,6 @@ body {
     flex-direction: column;
 }
 
-.container .main .link {
-    margin-top: 164px;
-    margin-left: 36px;
-}
-
 .container .main .link a {
     color: #0038FF;
     font-family: 'Montserrat', sans-serif;
@@ -291,7 +286,7 @@ body {
 }
 
 .container .main .title {
-    margin-top: 32px;
+    margin-top: 190px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -307,7 +302,7 @@ body {
 
 .container .main .today {
     width: 1220px;
-    margin-top: 132px;
+    margin-top: 110px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
