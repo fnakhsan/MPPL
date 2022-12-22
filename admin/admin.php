@@ -39,7 +39,7 @@ if (isset($_POST['submitBtn'])) {
         }
     }
 
-    header("location:../history-admin/history.php");
+    header("Refresh:0");
 }
 ?>
 

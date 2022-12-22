@@ -60,7 +60,7 @@ if (isset($_POST['update'])) {
             $alert = "Presensi tidak berhasil dilakukan";
         }
     }
-    header("location:../history-admin/history.php");
+    header("Refresh:0");
 }
 ?>
 
