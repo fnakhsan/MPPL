@@ -170,7 +170,6 @@ if (isset($_POST['update'])) {
                     </ul>
                 </ul>
             </div>
-
             <table class="table" border="1">
                 <thead>
                     <tr>

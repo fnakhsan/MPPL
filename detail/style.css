@@ -418,12 +418,11 @@ body {
 
 .container .main .submit {
     background-color: #FF2667;
-    width: 100px;
-    height: 30px;
-    margin-top: 32px;
+    width: 400px;
+    height: 60px;
+    margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 40px;
     border-width: 2px;
     border-color: #000000;
     border-radius: 10px;
@@ -433,14 +432,13 @@ body {
     justify-content: center;
     color: #000000;
     font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 24px;
+    font-weight: 600;
     text-transform: uppercase;
 }
 
 .container .main .submit:hover {
     opacity: .8;
-    cursor: pointer;
 }
 
 @media (max-width : 1600px) {

@@ -110,7 +110,7 @@ if (isset($_POST['submitBtn'])) {
                             echo "<td>" . $user_data['id_guru'] . "</td>";
                             echo "<td>" . $user_data['status'] . "</td>";
                             echo "<td> <a href=\"../berkas/" . $user_data['keterangan'] . "\" target=\"_blank\" rel=\"noopener noreferrer\">" . $user_data['keterangan'] . "</a> </td>";
-                            echo "<td>" . $user_data['valid' . $user_data['id_presensi']] . " |" . $validate . "</td>";
+                            echo "<td>" . $user_data['valid'] . "|" . $validate . "</td>";
                             echo "</tr>";
                         }
                         while ($user_data = mysqli_fetch_array($query2)) {
@@ -127,7 +127,7 @@ if (isset($_POST['submitBtn'])) {
                             echo "<td>" . $user_data['id_siswa'] . "</td>";
                             echo "<td>" . $user_data['status'] . "</td>";
                             echo "<td> <a href=\"../berkas/" . $user_data['keterangan'] . "\" target=\"_blank\" rel=\"noopener noreferrer\">" . $user_data['keterangan'] . "</a> </td>";
-                            echo "<td>" . $user_data['valid'] . " |" . $validate . "</td>";
+                            echo "<td>" . $user_data['valid'] . "|" . $validate . "</td>";
                             echo "</tr>";
                         }
                         ?>
