@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Des 2022 pada 15.37
+-- Waktu pembuatan: 25 Des 2022 pada 17.09
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 8.0.10
 
@@ -41,7 +41,7 @@ CREATE TABLE `presensi_guru` (
 --
 
 INSERT INTO `presensi_guru` (`id_presensi`, `id_guru`, `tgl_presensi`, `status`, `valid`, `keterangan`) VALUES
-(1, '1990111320190312', '2022-05-20', 'hadir', 'NY', 'WhatsApp Image 2020-10-08 at 13.05.30.jpeg');
+(2, '1990111320190312', '2022-12-25', 'hadir', 'Y', 'IMG-20221127-WA0017.jpg');
 
 -- --------------------------------------------------------
 
@@ -63,14 +63,8 @@ CREATE TABLE `presensi_siswa` (
 --
 
 INSERT INTO `presensi_siswa` (`id_presensi`, `id_siswa`, `tgl_presensi`, `status`, `valid`, `keterangan`) VALUES
-(10, '20106050026', '2022-05-19', 'hadir', 'NY', 'hadir.png'),
-(13, '20106050026', '2022-05-20', 'hadir', 'NY', 'hadir2.jpg'),
-(14, '20106050026', '2022-05-20', 'hadir', 'NY', 'Twibbon.png'),
-(15, '20106050026', '2022-06-09', 'hadir', 'Y', ''),
-(17, '20106050026', '2022-06-09', 'hadir', 'Y', 'wikipedia.jpg'),
-(18, '20106050026', '2022-06-09', 'hadir', 'Y', ''),
-(19, '20106050026', '2022-12-16', 'hadir', 'Y', 'WeTalk04.png'),
-(20, '20106050026', '2022-12-22', 'hadir', 'Y', '');
+(21, '20106050026', '2022-12-25', 'hadir', 'Y', 'IMG20221112114333.jpg'),
+(22, '20106050029', '2022-12-25', 'hadir', 'NY', 'IMG20221029112836.jpg');
 
 -- --------------------------------------------------------
 
@@ -116,7 +110,6 @@ CREATE TABLE `tb_guru` (
 --
 
 INSERT INTO `tb_guru` (`id_guru`, `nama`, `jk`, `alamat`, `no_hp`, `tgl_lhr`, `pw_guru`) VALUES
-('1234567890', 'Abi', 'L', 'Pekanbaru', '082878378212', '1992-12-02', 'd6ccd07eab5df01d09888a9b1599f792'),
 ('1990111320190312', 'Muhammad Galih Wonoseto', 'L', 'Sleman', '088844442222', '1990-01-01', '5bb5f844dac13bc003f6ba50026249b8');
 
 -- --------------------------------------------------------
@@ -188,13 +181,13 @@ ALTER TABLE `tb_siswa`
 -- AUTO_INCREMENT untuk tabel `presensi_guru`
 --
 ALTER TABLE `presensi_guru`
-  MODIFY `id_presensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_presensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `presensi_siswa`
 --
 ALTER TABLE `presensi_siswa`
-  MODIFY `id_presensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_presensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
